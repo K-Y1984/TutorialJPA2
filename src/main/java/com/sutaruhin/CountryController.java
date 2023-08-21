@@ -26,7 +26,7 @@ public class CountryController {
 
 
 
-    @GetMapping(value = { "/detail", "/detail/{code}/" })
+    @GetMapping(value = { "/detail", "/detail/{code}" })
     public String getCountry(@PathVariable(name = "code", required = false) String code, Model model) {
 
         Country country = code != null ? service.getCountry(code) : new Country();
@@ -48,20 +48,17 @@ public class CountryController {
     }
 
 
-    @GetMapping("/delete")
-    public String deleteCountryForm(Model model) {
-
+    @GetMapping("/delete/{code}")
+    public String deleteCountryForm(@PathVariable("code") String code, Model model) {
+        // 選択された国のコードをモデルに追加
+        model.addAttribute("code", code);
         return "country/delete";
     }
 
 
     @PostMapping("/delete")
     public String deleteCountry(@RequestParam("code") String code, Model model) {
-
         service.deleteCountry(code);
-
-
         return "redirect:/country/list";
     }
-
 }

@@ -1,3 +1,4 @@
+<!-- delete.html -->
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
@@ -8,8 +9,9 @@
     <h1>Country 削除</h1>
     <p>削除する国のコードを指定してください。</p>
     <form method="post" action="/country/delete">
-        <input type="text" name="code" th:value="${code}">
+        <input type="text" name="code" th:value="${code}" readonly>  <!-- 初期値をセットし、編集不可にしました -->
         <button type="submit">送信</button>
+        <a href="/country/list/">一覧画面へ戻る</a> <!-- 修正した部分 -->
     </form>
 </body>
 </html>

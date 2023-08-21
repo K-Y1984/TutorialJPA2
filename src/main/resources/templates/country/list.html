@@ -1,3 +1,4 @@
+<!-- list.html -->
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
@@ -5,18 +6,23 @@
     <title>Tutorial of JPA</title>
 </head>
 <body>
-    <h1>Country一覧</h1>
+    <h1>Country リスト</h1>
     <table>
         <tr>
             <th>コード</th>
             <th>国名</th>
             <th>人口</th>
+            <th>詳細画面</th>
+            <th>削除画面</th>
         </tr>
-        <tr th:each="data : ${countrylist}">
-            <td th:text="${data.code}"></td>
-            <td th:text="${data.name}"></td>
-            <td th:text="${data.population}"></td>
+        <tr th:each="country : ${countrylist}">
+            <td th:text="${country.code}"></td>
+            <td th:text="${country.name}"></td>
+            <td th:text="${country.population}"></td>
+            <td><a th:href="@{/country/detail/{code}(code=${country.code})}">詳細</a></td>  <!-- 修正した部分 -->
+            <td><a th:href="@{/country/delete/{code}(code=${country.code})}">削除</a></td> <!-- 修正した部分 -->
         </tr>
     </table>
+    <a href="/country/detail/">新しい国を追加</a>
 </body>
 </html>
